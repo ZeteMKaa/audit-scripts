@@ -167,6 +167,7 @@ PROCESS_COM "who" "Currently logged on users"
 PROCESS_COM "whoami" "Display effective userid"
 PROCESS_COM "id" "Information about current userid"
 PROCESS_COM "uname -a" "Information about system"
+PROCESS_FILE $(readlink -f /etc/lsb-release) "Linux Standard Base"
 PROCESS_SCOMMENT "Shows environment settings"
 PROCESS_SCOM set
 # End of General information #
