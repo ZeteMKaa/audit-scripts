@@ -344,6 +344,8 @@ PROCESS_COM "umask" "Shows current umask of current user"
 PROCESS_FILE $(readlink -f /etc/security/limits.conf) "User limitations"
 PROCESS_FILE $(readlink -f /etc/security/limits) "User limitations"
 PROCESS_FILE $(readlink -f /etc/sudoers) "User in sudoers file"
+for A in $(ls -1 /etc/sudoers.d/*); do PROCESS_FILE $(readlink -f $A) "SUDOERS.D files"; done
+
 # End of Authorisation information #
 
 # Network and daemon configuration information #
