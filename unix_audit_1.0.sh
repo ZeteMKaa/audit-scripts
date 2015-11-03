@@ -281,6 +281,7 @@ PROCESS_FILE $(readlink -f /etc/pam.d/common-account) "Pam.d common-account file
 PROCESS_FILE $(readlink -f /etc/pam.d/common-password) "Pam.d common-password file"
 PROCESS_FILE $(readlink -f /etc/pam.d/login) "Pam.d login file"
 PROCESS_FILE $(readlink -f /etc/pam.d/sshd) "Pam.d sshd file"
+for A in $(ls -1 /etc/pam.d/*); do PROCESS_FILE $(readlink -f $A) "Pam.d $A files"; done
 PROCESS_FILE $(readlink -f /etc/auth/system/files) "Protection attributes of system files"
 PROCESS_FILE $(readlink -f /etc/auth/system/default) "Default values for database fields"
 # End of Authentication information #
@@ -498,6 +499,7 @@ PROCESS_FILE $(readlink -f /etc/sec/auditd_loc) "Alternate location of audit log
 PROCESS_FILE $(readlink -f /etc/sec/auditd_clients) "List of remote hosts that send their audit data to local system"
 PROCESS_FILE $(readlink -f /etc/syslog.conf) "Rules for logging system messages"
 PROCESS_FILE $(readlink -f /etc/rsyslog.conf) "Rsyslog config"
+for A in $(ls -1 /etc/rsyslog.d/*); do PROCESS_FILE $(readlink -f $A) "Rsyslog.d $A files"; done
 PROCESS_FILE $(readlink -f /etc/audit/auditd.conf) "Audit config"
 PROCESS_FILE $(readlink -f /etc/audit/audit.rules) "Audit rules"
 PROCESS_LOGFILE $(readlink -f /var/adm/messages) "Record of important messages"
