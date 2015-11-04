@@ -446,7 +446,7 @@ PROCESS_FILE $(readlink -f /etc/rc.config.d/netconf) "IP configuration"
 PROCESS_FILE $(readlink -f /etc/ssh/sshd_config) "SSH configuration"
 PROCESS_COM "ifconfig -a" "Status network interfaces"
 PROCESS_COM "route -n" "Information about routes"
-PROCESS_COM "netstat -tpan" "Netstat -tpan"
+PROCESS_COM "netstat -pan" "Netstat -pan"
 PROCESS_COM "iptables -L" "IPTables"
 
 # End of Network information #
