@@ -168,6 +168,12 @@ PROCESS_COM "whoami" "Display effective userid"
 PROCESS_COM "id" "Information about current userid"
 PROCESS_COM "uname -a" "Information about system"
 PROCESS_FILE $(readlink -f /etc/lsb-release) "Linux Standard Base"
+PROCESS_FILE $(readlink -f /etc/system-release) "Generic Linux Release"
+PROCESS_FILE $(readlink -f /etc/debian_version) "Debian Linux Release"
+PROCESS_FILE $(readlink -f /etc/centos-release) "CentOs Linux Release"
+PROCESS_FILE $(readlink -f /etc/redhat-release) "RedHat Linux Release"
+PROCESS_FILE $(readlink -f /etc/oracle-release) "Oracle Linux Release"
+
 PROCESS_SCOMMENT "Shows environment settings"
 PROCESS_SCOM set
 # End of General information #
