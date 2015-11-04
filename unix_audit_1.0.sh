@@ -146,6 +146,10 @@ rm -f $HTMLFILE
 rm -f $TMPFILE
 echo "<HTML>" >> $HTMLFILE
 echo "<HEAD>" >> $HTMLFILE
+echo "<style>br {" >> $HTMLFILE
+echo "   display: block;" >> $HTMLFILE
+echo "   margin: 1px 0;" >> $HTMLFILE
+echo "}</style>" >> $HTMLFILE
 echo "<TITLE>EY - Unix/Linux script</TITLE>" >> $HTMLFILE
 echo "</HEAD>" >> $HTMLFILE
 echo "<BODY BGCOLOR=#FFFFFF LINK=#1C1C1C VLINK=#1C1C1C>" >> $HTMLFILE
