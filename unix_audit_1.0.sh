@@ -284,13 +284,6 @@ PROCESS_FILE $(readlink -f /etc/security/group.conf) "Group permissions for tty 
 PROCESS_FILE $(readlink -f /etc/security/pam_env.conf) "Configuration file for PAM module #1"
 # for A in $(ls -1 /etc/pam.d/); do PROCESS_FILE $(readlink -f $A) "PAM.D files"; done
 PROCESS_FILE $(readlink -f /etc/pam.conf) "Configuration file for pluggable authentication modules"
-PROCESS_FILE $(readlink -f /etc/pam.d/system-auth) "Pam.d system-auth file"
-PROCESS_FILE $(readlink -f /etc/pam.d/password-auth) "Pam.d password-auth file"
-PROCESS_FILE $(readlink -f /etc/pam.d/common-auth) "Pam.d common-auth file"
-PROCESS_FILE $(readlink -f /etc/pam.d/common-account) "Pam.d common-account file"
-PROCESS_FILE $(readlink -f /etc/pam.d/common-password) "Pam.d common-password file"
-PROCESS_FILE $(readlink -f /etc/pam.d/login) "Pam.d login file"
-PROCESS_FILE $(readlink -f /etc/pam.d/sshd) "Pam.d sshd file"
 for A in $(ls -1 /etc/pam.d/*); do PROCESS_FILE $(readlink -f $A) "Pam.d $A files"; done
 PROCESS_FILE $(readlink -f /etc/auth/system/files) "Protection attributes of system files"
 PROCESS_FILE $(readlink -f /etc/auth/system/default) "Default values for database fields"
