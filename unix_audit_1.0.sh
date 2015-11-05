@@ -348,7 +348,7 @@ PROCESS_COM "umask" "Shows current umask of current user"
 PROCESS_FILE $(readlink -f /etc/security/limits.conf) "User limitations"
 PROCESS_FILE $(readlink -f /etc/security/limits) "User limitations"
 PROCESS_FILE $(readlink -f /etc/sudoers) "User in sudoers file"
-for A in $(ls -1 /etc/sudoers.d/*); do PROCESS_FILE $(readlink -f $A) "SUDOERS.D files"; done
+for A in $(ls -1 /etc/sudoers.d/*); do PROCESS_FILE $(readlink -f $A) "Sudoers.d files"; done
 
 # End of Authorisation information #
 
@@ -506,6 +506,7 @@ PROCESS_FILE $(readlink -f /etc/rsyslog.conf) "Rsyslog config"
 for A in $(ls -1 /etc/rsyslog.d/*); do PROCESS_FILE $(readlink -f $A) "Rsyslog.d $A files"; done
 PROCESS_FILE $(readlink -f /etc/audit/auditd.conf) "Audit config"
 PROCESS_FILE $(readlink -f /etc/audit/audit.rules) "Audit rules"
+for A in $(ls -1 /var/log/audit/*); do PROCESS_FILE $(readlink -f $A) "Audit log $A files"; done
 PROCESS_LOGFILE $(readlink -f /var/adm/messages) "Record of important messages"
 PROCESS_LOGFILE $(readlink -f /var/log/messages) "Record of important messages"
 PROCESS_LOGFILE $(readlink -f /var/log/syslog) "Record of system messages"
