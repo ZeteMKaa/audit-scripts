@@ -451,7 +451,7 @@ PROCESS_FILE $(readlink -f /etc/ssh/sshd_config) "SSH configuration"
 PROCESS_COM "ifconfig -a" "Status network interfaces"
 PROCESS_COM "route -n" "Information about routes"
 PROCESS_COM "netstat -pan" "Netstat -pan"
-PROCESS_COM "iptables -L" "IPTables"
+PROCESS_COM "iptables-save" "IPTables"
 
 # End of Network information #
 
