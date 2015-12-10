@@ -142,6 +142,7 @@ echo "</FONT>" >> $HTMLFILE;
 # start of execution
 TMPFILE="temp_file.tmp"
 HTMLFILE="EY_IT_Audit.html"
+NAME=`uname -n`
 rm -f $HTMLFILE
 rm -f $TMPFILE
 echo "<HTML>" >> $HTMLFILE
@@ -150,7 +151,7 @@ echo "<style>br {" >> $HTMLFILE
 echo "   display: block;" >> $HTMLFILE
 echo "   margin: 1px 0;" >> $HTMLFILE
 echo "}</style>" >> $HTMLFILE
-echo "<TITLE>EY - Unix/Linux script</TITLE>" >> $HTMLFILE
+echo "<TITLE>"$NAME" - EY Audit</TITLE>" >> $HTMLFILE
 echo "</HEAD>" >> $HTMLFILE
 echo "<BODY BGCOLOR=#FFFFFF LINK=#1C1C1C VLINK=#1C1C1C>" >> $HTMLFILE
 clear
