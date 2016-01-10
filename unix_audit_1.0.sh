@@ -359,7 +359,9 @@ echo "<br><br>" >> $HTMLFILE
 echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#ffe600">Netwerk en deamon configuratie informatie</FONT>" >> $HTMLFILE
 PROCESS_SECTION1 "Netwerk en deamon configuratie informatie"
 echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
-PROCESS_COM "ps -ef" "Current processes"
+PROCESS_COM "ps -ef" "Current processes 1"
+PROCESS_COM "ps -faux" "Current processes 2"
+PROCESS_COM "lsof -l" "lsof -l"
 PROCESS_COM "rpcinfo -p" "Shows which services are registered with the portmapper"
 PROCESS_FILE $(readlink -f /etc/inet/services) "Shows available services"
 #PROCESS_FILE $(readlink -f /etc/services) "Shows available services"
@@ -452,7 +454,12 @@ PROCESS_FILE $(readlink -f /etc/rc.config.d/netconf) "IP configuration"
 PROCESS_FILE $(readlink -f /etc/ssh/sshd_config) "SSH configuration"
 PROCESS_COM "ifconfig -a" "Status network interfaces"
 PROCESS_COM "route -n" "Information about routes"
+PROCESS_COM "route" "Information about rout1es"
 PROCESS_COM "netstat -pan" "Netstat -pan"
+PROCESS_COM "netstat -Aan" "Netstat -Aan"
+PROCESS_COM "lsof -i" "lsof -i"
+
+
 PROCESS_COM "iptables-save" "IPTables"
 
 # End of Network information #
@@ -550,7 +557,8 @@ PROCESS_COM "/usr/sbin/swlist -l patch" "HP-UX installed patches"
 PROCESS_COM "/usr/sbin/no -a" "AIX network options"
 PROCESS_COM "/usr/bin/oslevel -r" "AIX highest recommended maintenance level"
 PROCESS_COM "yum check-update --security" "RedHat Enterprise Linux available security updates"
-
+PROCESS_COM "lslpp -l" "AIX List installed software"
+PROCESS_COM "lsfilt -v4" "AIX List filewall rules"
 # End of OS specific information #
 clear
 echo ""
