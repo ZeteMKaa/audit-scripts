@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # 
-# Audit Scirpt
+# Audit Script
 #
 
 # Het script moet worden gebruikt onder root en met de bash shell.
