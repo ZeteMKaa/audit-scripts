@@ -313,11 +313,13 @@ PROCESS_FILE $(ls -l /etc/auth/system/default | awk '{print$NF}') "Default value
 # End of Authentication information #
 
 # Homedirs information#
+echo "<br><br>" >> $HTMLFILE
+echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#ffe600">Homedirs informatie</FONT>" >> $HTMLFILE
+PROCESS_SECTION1 "Homedirs informatie"
+echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
 PROCESS_RDIR "/home"
 for A in $(ls -1 /home/); do PROCESS_FILE $(ls -l /home/$A/.profile | awk '{print$NF}') "User profile from $A"; done
-
 # End of homedirs information #
-
 
 # Authorisation information #
 echo "<br><br>" >> $HTMLFILE
@@ -579,8 +581,10 @@ echo "<br><br>" >> $HTMLFILE
 echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#ffe600">Besturingssysteem specifieke informatie</FONT>" >> $HTMLFILE
 PROCESS_SECTION1 "Besturingssysteem specifieke informatie"
 echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
-PROCESS_COM "rpm -qa" "RedHat Enterprise Linux list installed packages"
-PROCESS_COM "yum check-update --security" "RedHat Enterprise Linux available security updates"
+PROCESS_COM "rpm -qa" "RHEL list installed packages"
+PROCESS_COM "yum check-update --security" "RHEL available security updates"
+PROCESS_FILE $(ls -l /etc/security/pwquality.conf | awk '{print$NF}') "RHEL7 Password quality configuration pam_pwquality.so"
+PROCESS_COM "pwscore" "RHEL 7 Password quality check"
 PROCESS_COM "/usr/sbin/showrev -p" "Solaris installed patches"
 PROCESS_COM "/usr/sbin/swlist -l patch" "HP-UX installed patches"
 PROCESS_COM "/usr/sbin/instfix -i" "AIX installed patches"
