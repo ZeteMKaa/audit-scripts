@@ -214,6 +214,7 @@ PROCESS_FILE $(ls -l /etc/environment | awk '{print$NF}') "Specifies basic envir
 PROCESS_FILE $(ls -l /etc/security/group | awk '{print$NF}') "Group information"
 PROCESS_FILE $(ls -l /etc/security/group.adjunct | awk '{print$NF}') "Shadow group file"
 PROCESS_FILE $(ls -l /etc/profile | awk '{print$NF}') "Default user profile"
+PROCESS_FILE $(ls -l /etc/etc_profile | awk '{print$NF}') "Default user etc_profile"
 PROCESS_FILE $(ls -l /etc/defaults/su | awk '{print$NF}') "Default environment for root after su"
 PROCESS_FILE $(ls -l /etc/default/security | awk '{print$NF}') "Security defaults config file"
 PROCESS_FILE $(ls -l /etc/defaults/login | awk '{print$NF}') "Defaults for login"
@@ -233,6 +234,7 @@ PROCESS_FILE $(ls -l /etc/smbpasswd | awk '{print$NF}') "Samba encrypted passwor
 PROCESS_FILE $(ls -l /usr/lpp/ssp/config/admin/newpass.log | awk '{print$NF}') "AIX SP user passwords"
 PROCESS_FILE $(ls -l /etc/shadow | awk '{print$NF}') "Shadow password file"
 PROCESS_FILE $(ls -l /.secure/etc/passwd | awk '{print$NF}') "Password file in trusted mode"
+for A in `ls -la`
 PROCESS_FILE $HOME/.cshrc "Environment file for C shell"
 PROCESS_FILE $(ls -l /usr/skell/.cshrc | awk '{print$NF}') "Default file for C shell"
 PROCESS_FILE $HOME/.kshrc "Environment file for Korn shell"
