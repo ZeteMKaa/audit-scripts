@@ -244,6 +244,7 @@ PROCESS_FILE $HOME/.profile "Environment file for sh and ksh shells"
 PROCESS_FILE $(ls -l /usr/skell/.profile | awk '{print$NF}') "Default file for sh and ksh shells"
 PROCESS_FILE $HOME/.plan "Message displayed by the finger command"
 PROCESS_FILE $(ls -l /etc/d_passwd | awk '{print$NF}') "File of dialup passwords"
+PROCESS_FILE $(ls -l /etc/wvdial.conf | awk '{print$NF}' ) "File of Wvdial"
 # PROCESS_SCOMMENT Display contents of .profile files
 # PROCESS_SCOM find / \( -name .profile \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
 # PROCESS_SCOMMENT Display contents of .rhosts files
