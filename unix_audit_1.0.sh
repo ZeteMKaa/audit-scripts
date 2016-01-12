@@ -83,6 +83,24 @@ then   echo "<br>" >> $TMPFILE
 fi
 }
 
+# usage: PROCESS_RDIR [directory]
+function PROCESS_RDIR ()
+{
+if [[ -d $1 ]]
+then   echo "<br>" >> $TMPFILE
+  echo "<FONT FAMILY="Arial" SIZE="5" COLOR="#1C1C1C"><a name=$1></a>$1</FONT>" >> $TMPFILE
+  echo "<br>" >> $TMPFILE
+  echo "<li><a href=#$1>Inhoud van de directory: $1</a>" >> $HTMLFILE
+  echo "<pre>" >> $TMPFILE
+  echo "<br>" >> $TMPFILE
+  echo "Commando: ls -al $1"
+  ls -aRl $1 | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/^/<br>/g' >> $TMPFILE
+  echo "<br>" >> $TMPFILE
+  echo "<FONT FAMILY="Arial" SIZE="2" COLOR="#1C1C1C"><i><a href=#home>[Naar inhoudsopgave]</a></i></FONT>" >> $TMPFILE
+  echo "</pre><hr>" >> $TMPFILE
+fi
+}
+
 # usage: PROCESS_COM "[command params]" "[comments]"
 function PROCESS_COM ()
 {
@@ -290,6 +308,13 @@ for A in $(ls -1 /etc/pam.d/*); do PROCESS_FILE $(ls -l $A | awk '{print$NF}') "
 PROCESS_FILE $(ls -l /etc/auth/system/files | awk '{print$NF}') "Protection attributes of system files"
 PROCESS_FILE $(ls -l /etc/auth/system/default | awk '{print$NF}') "Default values for database fields"
 # End of Authentication information #
+
+# Homedirs information#
+PROCESS_RDIR "/home"
+for A in $(ls -1 /home/); do PROCESS_FILE $(ls -l /home/$A/.profile | awk '{print$NF}') "User profile from $A"; done
+
+# End of homedirs information #
+
 
 # Authorisation information #
 echo "<br><br>" >> $HTMLFILE
