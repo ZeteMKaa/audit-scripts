@@ -551,12 +551,13 @@ echo "<br><br>" >> $HTMLFILE
 echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#ffe600">Besturingssysteem specifieke informatie</FONT>" >> $HTMLFILE
 PROCESS_SECTION1 "Besturingssysteem specifieke informatie"
 echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
-PROCESS_COM "/usr/sbin/instfix -i" "AIX installed patches"
+PROCESS_COM "rpm -qa" "RedHat Enterprise Linux list installed packages"
+PROCESS_COM "yum check-update --security" "RedHat Enterprise Linux available security updates"
 PROCESS_COM "/usr/sbin/showrev -p" "Solaris installed patches"
 PROCESS_COM "/usr/sbin/swlist -l patch" "HP-UX installed patches"
+PROCESS_COM "/usr/sbin/instfix -i" "AIX installed patches"
 PROCESS_COM "/usr/sbin/no -a" "AIX network options"
 PROCESS_COM "/usr/bin/oslevel -r" "AIX highest recommended maintenance level"
-PROCESS_COM "yum check-update --security" "RedHat Enterprise Linux available security updates"
 PROCESS_COM "lslpp -l" "AIX List installed software"
 PROCESS_COM "lsfilt -v4" "AIX List filewall rules"
 # End of OS specific information #
