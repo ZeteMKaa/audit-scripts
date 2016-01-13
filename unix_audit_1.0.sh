@@ -575,6 +575,7 @@ echo "<br><br>" >> $HTMLFILE
 echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#ffe600">Oracle informatie</FONT>" >> $HTMLFILE
 PROCESS_SECTION1 "Oracle informatie"
 echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
+PROCESS_FILE $(ls -l $ORACLE_HOME/network/admin/listener.ora | awk '{print$NF}')  ""
 PROCESS_SCOMMENT Display contents of init Oracle files
 PROCESS_SCOM nice -n 10 find / \( -name init*.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
 PROCESS_SCOMMENT Display contents of Protocol file for Oracle
@@ -583,6 +584,8 @@ PROCESS_SCOMMENT Display contents of Listener file for Oracle
 PROCESS_SCOM nice -n 10 find / \( -name listener.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
 PROCESS_SCOMMENT Display contents of SQLnet.ora file for Oracle
 PROCESS_SCOM nice -n 10 find / \( -name sqlnet.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
+PROCESS_SCOMMENT tkprof utility for Oracle
+PROCESS_SCOM nice -n 10 find / \( -name tkprof \) ! -fstype nfs -exec ls -la {} \; -exec ls -la {} \;
 # End of Oracle information #
 
 # OS specific commands #
@@ -601,7 +604,6 @@ PROCESS_COM "pwscore" "RHEL 7 Password quality check"
 PROCESS_COM "rpm -q --queryformat "%{SUMMARY}\n" gpg-pubkey" "Verify GPG Key is Installed"
 PROCESS_COM "rpm -qVa | awk '$2 != "c" { print $0}'" "RHEL Verify Package Integrity Using RPM"
 PROCESS_COM "chkconfig --list" "RHEL Lists all of the services which chkconfig knows about" 
-
 PROCESS_COM "/usr/sbin/showrev -p" "Solaris installed patches"
 PROCESS_COM "/usr/sbin/swlist -l patch" "HP-UX installed patches"
 PROCESS_COM "/usr/sbin/instfix -i" "AIX installed patches"
