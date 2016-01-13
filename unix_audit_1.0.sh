@@ -328,6 +328,8 @@ PROCESS_SECTION1 "Autorisatie informatie"
 echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
 PROCESS_SCOMMENT Search filesystem for sticky bits
 PROCESS_SCOM find / -perm -1000 ! -fstype nfs -exec ls -ld {} \;
+PROCESS_SCOMMENT Search filesystem for directory sticky bits 
+PROCESS_SCOM df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null 
 PROCESS_SCOMMENT Search filesystem for SGID bits
 PROCESS_SCOM find / -perm -2000 ! -fstype nfs -exec ls -ld {} \;
 PROCESS_SCOMMENT Search filesystem for SUID bits
@@ -347,6 +349,7 @@ PROCESS_DIR "/etc/ssh"
 PROCESS_DIR "/etc/pam.d" 
 PROCESS_DIR "/etc/cron.d"
 PROCESS_DIR "/etc/selinux"
+PROCESS_DIR "/etc/modprobe.d"
 PROCESS_DIR "$HOME"
 PROCESS_DIR "/home"
 PROCESS_DIR "/var/adm/crontab/"
@@ -381,6 +384,13 @@ PROCESS_FILE $(ls -l /etc/security/limits.conf | awk '{print$NF}') "User limitat
 PROCESS_FILE $(ls -l /etc/security/limits | awk '{print$NF}') "User limitations"
 PROCESS_FILE $(ls -l /etc/sudoers | awk '{print$NF}') "User in sudoers file"
 for A in $(ls -1 /etc/sudoers.d/*); do PROCESS_FILE $(ls -l $A | awk '{print$NF}') "Sudoers.d files"; done
+PROCESS_DIR "/boot/grub"
+PROCESS_DIR "/boot/grub2"
+PROCESS_FILE $(ls -l /boot/grub/grub.cfg | awk '{print$NF}') "Grub configuration"
+PROCESS_FILE $(ls -l /boot/grub2/grub.cfg | awk '{print$NF}') "Grub2 configuration"
+PROCESS_FILE $(ls -l /etc/sysctl.conf | awk '{print$NF}') "Kernel parameters configuration"
+PROCESS_COM "/sbin/sysctl -a" "Kernel parameters all values currently available"
+
 
 # End of Authorisation information #
 
@@ -435,7 +445,6 @@ PROCESS_FILE $(ls -l /var/adm/inetd.sec | awk '{print$NF}') "Optional inetd secu
 PROCESS_FILE $(ls -l /etc/rc.config.d/nddconf | awk '{print$NF}') "Network tunable parameters"
 PROCESS_FILE $(ls -l /etc/rc.net | awk '{print$NF}') "Network tunable parameters"
 PROCESS_LOGFILE /etc/rc.log "RC log file"
-PROCESS_FILE $(ls -l /etc/sysctl.conf | awk '{print$NF}') "Network tunable parameters"
 PROCESS_FILE $(ls -l /etc/rc.conf | awk '{print$NF}') "RC config file"
 PROCESS_FILE $(ls -l /etc/hosts.equiv | awk '{print$NF}') "Remote systems that can execute commands on the local system"
 PROCESS_FILE $(ls -l /etc/networks | awk '{print$NF}') "Network name information"
@@ -583,8 +592,16 @@ PROCESS_SECTION1 "Besturingssysteem specifieke informatie"
 echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
 PROCESS_COM "rpm -qa" "RHEL list installed packages"
 PROCESS_COM "yum check-update --security" "RHEL available security updates"
+PROCESS_COM "yum check-update" "RHEL available updates"
+PROCESS_DIR "/etc/yum.repos.d/"
+PROCESS_FILE $(ls -l /etc/yum.conf | awk '{print$NF}') "RHEL yum configuration"
+PROCESS_FILE $(ls -l /etc/yum/vars | awk '{print$NF}') "RHEL yum vars configuration"
 PROCESS_FILE $(ls -l /etc/security/pwquality.conf | awk '{print$NF}') "RHEL7 Password quality configuration pam_pwquality.so"
 PROCESS_COM "pwscore" "RHEL 7 Password quality check"
+PROCESS_COM "rpm -q --queryformat "%{SUMMARY}\n" gpg-pubkey" "Verify GPG Key is Installed"
+PROCESS_COM "rpm -qVa | awk '$2 != "c" { print $0}'" "RHEL Verify Package Integrity Using RPM"
+PROCESS_COM "chkconfig --list" "RHEL Lists all of the services which chkconfig knows about" 
+
 PROCESS_COM "/usr/sbin/showrev -p" "Solaris installed patches"
 PROCESS_COM "/usr/sbin/swlist -l patch" "HP-UX installed patches"
 PROCESS_COM "/usr/sbin/instfix -i" "AIX installed patches"
