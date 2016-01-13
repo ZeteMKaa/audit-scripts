@@ -232,6 +232,7 @@ PROCESS_FILE $(ls -l /etc/environment | awk '{print$NF}') "Specifies basic envir
 PROCESS_FILE $(ls -l /etc/security/group | awk '{print$NF}') "Group information"
 PROCESS_FILE $(ls -l /etc/security/group.adjunct | awk '{print$NF}') "Shadow group file"
 PROCESS_FILE $(ls -l /etc/profile | awk '{print$NF}') "Default user profile"
+PROCESS_FILE $(ls -l /etc/bashrc | awk '{print$NF}') "Default user bashrc"
 PROCESS_FILE $(ls -l /etc/etc_profile | awk '{print$NF}') "Default user etc_profile"
 PROCESS_FILE $(ls -l /etc/defaults/su | awk '{print$NF}') "Default environment for root after su"
 PROCESS_FILE $(ls -l /etc/default/security | awk '{print$NF}') "Security defaults config file"
