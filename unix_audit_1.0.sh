@@ -190,7 +190,6 @@ PROCESS_COM "who" "Currently logged on users"
 PROCESS_COM "whoami" "Display effective userid"
 PROCESS_COM "id" "Information about current userid"
 PROCESS_COM "uname -a" "Information about system"
-PROCESS_COM "ip addr" "Network configuration"
 PROCESS_FILE $(ls -l /etc/lsb-release | awk '{print$NF}') "Linux Standard Base"
 PROCESS_FILE $(ls -l /etc/system-release | awk '{print$NF}') "Generic Linux Release"
 PROCESS_FILE $(ls -l /etc/debian_version | awk '{print$NF}') "Debian Linux Release"
@@ -401,6 +400,7 @@ echo "<br><br>" >> $HTMLFILE
 echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#ffe600">Netwerk en deamon configuratie informatie</FONT>" >> $HTMLFILE
 PROCESS_SECTION1 "Netwerk en deamon configuratie informatie"
 echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
+PROCESS_COM "ip addr" "Network configuration"
 PROCESS_COM "ps -ef" "Current processes 1"
 PROCESS_COM "ps -faux" "Current processes 2"
 PROCESS_COM "lsof -l" "lsof -l"
@@ -580,14 +580,19 @@ echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
 PROCESS_FILE $(ls -l $ORACLE_HOME/network/admin/listener.ora | awk '{print$NF}')  ""
 PROCESS_SCOMMENT Display contents of init Oracle files
 PROCESS_SCOM nice -n 10 find / \( -name init*.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
+PROCESS_SCOMMENT Display contents of orapwd Oracle files
+PROCESS_SCOM nice -n 10 find / \( -name orapwd* \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
 PROCESS_SCOMMENT Display contents of Protocol file for Oracle
 PROCESS_SCOM nice -n 10 find / \( -name protocol.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
+PROCESS_SCOMMENT Display contents of Config.ora file for Oracle
+PROCESS_SCOM nice -n 10 find / \( -name config.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
 PROCESS_SCOMMENT Display contents of Listener file for Oracle
 PROCESS_SCOM nice -n 10 find / \( -name listener.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
 PROCESS_SCOMMENT Display contents of SQLnet.ora file for Oracle
 PROCESS_SCOM nice -n 10 find / \( -name sqlnet.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
 PROCESS_SCOMMENT tkprof utility for Oracle
 PROCESS_SCOM nice -n 10 find / \( -name tkprof \) ! -fstype nfs -exec ls -la {} \; -exec ls -la {} \;
+PROCESS_RDIR "$ORACLE_BASE/oradata/"
 # End of Oracle information #
 
 # OS specific commands #
