@@ -624,6 +624,10 @@ PROCESS_COM "/usr/bin/oslevel -r" "AIX highest recommended maintenance level"
 PROCESS_COM "lslpp -l" "AIX List installed software"
 PROCESS_COM "lsfilt -v4" "AIX List filewall rules"
 PROCESS_FILE $(ls -l /usr/lib/security/methods.cfg | awk '{print$NF}') "AIX Security methods"
+PROCESS_FILE $(ls -l /etc/objrepos | awk '{print$NF}') "AIX Object Data Manager /etc"
+PROCESS_FILE $(ls -l /usr/lib/objrepos | awk '{print$NF}') "AIX Object Data Manager /usr"
+PROCESS_FILE $(ls -l /usr/share/lib/objrepos | awk '{print$NF}') "AIX Object Data Manager /usr/share"
+
 # End of OS specific information #
 
 # Custom OS configuration #
