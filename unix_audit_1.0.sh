@@ -623,8 +623,17 @@ PROCESS_COM "/usr/bin/oslevel -r" "AIX highest recommended maintenance level"
 PROCESS_COM "lslpp -l" "AIX List installed software"
 PROCESS_COM "lsfilt -v4" "AIX List filewall rules"
 PROCESS_FILE $(ls -l /usr/lib/security/methods.cfg | awk '{print$NF}') "AIX Security methods"
-
 # End of OS specific information #
+
+# Custom OS configuration #
+echo "<br><br>" >> $HTMLFILE
+echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#ffe600">Custom OS configurations</FONT>" >> $HTMLFILE
+PROCESS_SECTION1 "Custom OS configurations"
+echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
+PROCESS_RDIR "/prj"
+PROCESS_RDIR "/opt"
+# End of Custom OS configuration #
+
 clear
 echo ""
 echo "Het script heeft succesvol gedraaid!"
