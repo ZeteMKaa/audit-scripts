@@ -618,6 +618,7 @@ PROCESS_COM "/usr/sbin/no -a" "AIX network options"
 PROCESS_COM "/usr/bin/oslevel -r" "AIX highest recommended maintenance level"
 PROCESS_COM "lslpp -l" "AIX List installed software"
 PROCESS_COM "lsfilt -v4" "AIX List filewall rules"
+PROCESS_FILE $(ls -l /usr/lib/security/methods.cfg | awk '{print$NF}') "AIX Security methods"
 # End of OS specific information #
 clear
 echo ""
