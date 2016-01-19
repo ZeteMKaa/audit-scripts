@@ -543,6 +543,7 @@ PROCESS_FILE $(ls -l /etc/security/audit_user | awk '{print$NF}') "audit user in
 PROCESS_FILE $(ls -l /etc/security/audit/events | awk '{print$NF}') "Audit events file"
 PROCESS_FILE $(ls -l /etc/security/audit/objects | awk '{print$NF}') "Description of audited objects"
 PROCESS_FILE $(ls -l /etc/security/audit/config | awk '{print$NF}') "Audit config file"
+PROCESS_FILE $(ls -l /etc/security/audit/snarestream | awk '{print$NF}') "Snarestream config file"
 PROCESS_FILE $(ls -l /etc/sec/audit_events | awk '{print$NF}') "Audit events"
 PROCESS_FILE $(ls -l /etc/sec/site_events | awk '{print$NF}') "Specific audit events"
 PROCESS_FILE $(ls -l /etc/security/audit_control | awk '{print$NF}') "Audit control file"
@@ -622,6 +623,7 @@ PROCESS_COM "/usr/bin/oslevel -r" "AIX highest recommended maintenance level"
 PROCESS_COM "lslpp -l" "AIX List installed software"
 PROCESS_COM "lsfilt -v4" "AIX List filewall rules"
 PROCESS_FILE $(ls -l /usr/lib/security/methods.cfg | awk '{print$NF}') "AIX Security methods"
+
 # End of OS specific information #
 clear
 echo ""
