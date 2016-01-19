@@ -321,6 +321,7 @@ PROCESS_SECTION1 "Homedirs informatie"
 echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
 PROCESS_RDIR "/home"
 for A in $(ls -1 /home/); do PROCESS_FILE $(ls -l /home/$A/.profile | awk '{print$NF}') "User profile from $A"; done
+for A in $(ls -1 /home/); do PROCESS_FILE $(ls -l /home/$A/.rhosts | awk '{print$NF}') "User rhosts config from $A"; done
 # End of homedirs information #
 
 # Authorisation information #
