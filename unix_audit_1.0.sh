@@ -578,7 +578,7 @@ echo "<br><br>" >> $HTMLFILE
 echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#ffe600">Oracle informatie</FONT>" >> $HTMLFILE
 PROCESS_SECTION1 "Oracle informatie"
 echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
-PROCESS_FILE $(ls -l $ORACLE_HOME/network/admin/listener.ora | awk '{print$NF}')  ""
+PROCESS_FILE $(ls -l $ORACLE_HOME/network/admin/listener.ora | awk '{print$NF}')  "Content of listener.ora"
 PROCESS_SCOMMENT Display contents of init Oracle files
 PROCESS_SCOM nice -n 10 find / \( -name init*.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
 PROCESS_SCOMMENT Display contents of orapwd Oracle files
@@ -591,6 +591,8 @@ PROCESS_SCOMMENT Display contents of Listener file for Oracle
 PROCESS_SCOM nice -n 10 find / \( -name listener.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
 PROCESS_SCOMMENT Display contents of SQLnet.ora file for Oracle
 PROCESS_SCOM nice -n 10 find / \( -name sqlnet.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
+PROCESS_SCOMMENT Display contents of .dbf file for Oracle
+PROCESS_SCOM nice -n 10 find / \( -name *.dbf \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
 PROCESS_SCOMMENT tkprof utility for Oracle
 PROCESS_SCOM nice -n 10 find / \( -name tkprof \) ! -fstype nfs -exec ls -la {} \; -exec ls -la {} \;
 PROCESS_RDIR "$ORACLE_BASE/oradata/"
