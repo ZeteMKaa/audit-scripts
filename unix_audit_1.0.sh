@@ -627,6 +627,10 @@ PROCESS_FILE $(ls -l /usr/lib/security/methods.cfg | awk '{print$NF}') "AIX Secu
 PROCESS_FILE $(ls -l /etc/objrepos | awk '{print$NF}') "AIX Object Data Manager /etc"
 PROCESS_FILE $(ls -l /usr/lib/objrepos | awk '{print$NF}') "AIX Object Data Manager /usr"
 PROCESS_FILE $(ls -l /usr/share/lib/objrepos | awk '{print$NF}') "AIX Object Data Manager /usr/share"
+PROCESS_RDIR "/usr/IBM/HTTPserver/"
+for A in $(ls -1 /usr/IBM/HTTPserver/conf/*); do PROCESS_FILE $(ls -l $A | awk '{print$NF}') "IBM HTTPserver configuration: $A"; done
+
+
 
 # End of OS specific information #
 
