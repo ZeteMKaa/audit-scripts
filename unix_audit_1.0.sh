@@ -380,6 +380,8 @@ PROCESS_DIR "/boot/grub"
 PROCESS_DIR "/boot/grub2"
 PROCESS_FILE $(ls -l /boot/grub/grub.cfg | awk '{print$NF}') "Grub configuration"
 PROCESS_FILE $(ls -l /boot/grub2/grub.cfg | awk '{print$NF}') "Grub2 configuration"
+PROCESS_FILE $(ls -l /boot/grub/grub.conf | awk '{print$NF}') "Grub configuration"
+PROCESS_FILE $(ls -l /boot/grub2/grub.conf | awk '{print$NF}') "Grub2 configuration"
 PROCESS_FILE $(ls -l /etc/sysctl.conf | awk '{print$NF}') "Kernel parameters configuration"
 PROCESS_COM "/sbin/sysctl -a" "Kernel parameters all values currently available"
 
