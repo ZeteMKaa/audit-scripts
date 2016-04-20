@@ -307,6 +307,7 @@ PROCESS_FILE $(ls -l /etc/security/access.conf | awk '{print$NF}') "Loging acces
 PROCESS_FILE $(ls -l /etc/security/console.perms | awk '{print$NF}') "Console permissions"
 PROCESS_FILE $(ls -l /etc/security/group.conf | awk '{print$NF}') "Group permissions for tty and services"
 PROCESS_FILE $(ls -l /etc/security/pam_env.conf | awk '{print$NF}') "Configuration file for PAM module #1"
+PROCESS_FILE $(ls -l /etc/security/pwquality.conf | awk '{print$NF}') "PAM Password quality configuration pam_pwquality.so"
 # for A in $(ls -1 /etc/pam.d/); do PROCESS_FILE $(ls -l $A | awk '{print$NF}') "PAM.D files"; done
 PROCESS_FILE $(ls -l /etc/pam.conf | awk '{print$NF}') "Configuration file for pluggable authentication modules"
 for A in $(ls -1 /etc/pam.d/*); do PROCESS_FILE $(ls -l $A | awk '{print$NF}') "Pam.d $A files"; done
@@ -573,7 +574,6 @@ PROCESS_COM "yum check-update" "RHEL available updates"
 PROCESS_DIR "/etc/yum.repos.d/"
 PROCESS_FILE $(ls -l /etc/yum.conf | awk '{print$NF}') "RHEL yum configuration"
 PROCESS_FILE $(ls -l /etc/yum/vars | awk '{print$NF}') "RHEL yum vars configuration"
-PROCESS_FILE $(ls -l /etc/security/pwquality.conf | awk '{print$NF}') "RHEL7 Password quality configuration pam_pwquality.so"
 PROCESS_COM "pwscore" "RHEL 7 Password quality check"
 PROCESS_COM "rpm -q --queryformat "%{SUMMARY}\n" gpg-pubkey" "Verify GPG Key is Installed"
 PROCESS_COM "rpm -qVa | awk '$2 != "c" { print $0}'" "RHEL Verify Package Integrity Using RPM"
