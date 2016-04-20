@@ -175,7 +175,7 @@ echo "<BODY BGCOLOR=#FFFFFF LINK=#1C1C1C VLINK=#1C1C1C>" >> $HTMLFILE
 clear
 echo "Script is gestart."
 echo ""
-echo "Even geduld."
+echo "Even geduld, dit kan even duren."
 echo ""
 chmod 700 $HTMLFILE
 echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#1C1C1C"><a name=home></a>Inhoud</FONT>" >> $HTMLFILE
@@ -329,20 +329,6 @@ echo "<br><br>" >> $HTMLFILE
 echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#ffe600">Autorisatie informatie</FONT>" >> $HTMLFILE
 PROCESS_SECTION1 "Autorisatie informatie"
 echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
-PROCESS_SCOMMENT Search filesystem for sticky bits
-PROCESS_SCOM find / -perm -1000 ! -fstype nfs -exec ls -ld {} \;
-PROCESS_SCOMMENT Search filesystem for directory sticky bits 
-PROCESS_SCOM df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null 
-PROCESS_SCOMMENT Search filesystem for SGID bits
-PROCESS_SCOM find / -perm -2000 ! -fstype nfs -exec ls -ld {} \;
-PROCESS_SCOMMENT Search filesystem for SUID bits
-PROCESS_SCOM find / -perm -4000 ! -fstype nfs -exec ls -ld {} \;
-PROCESS_SCOMMENT Search filesystem for world writable files
-PROCESS_SCOM find / -perm -2 -a -type f ! -fstype nfs -exec ls -ld {} \;
-PROCESS_SCOMMENT Search filesystem for world writable directories
-PROCESS_SCOM find / -perm -2 -a -type d ! -fstype nfs -exec ls -ld {} \;
-PROCESS_SCOMMENT Search for files without user or group
-PROCESS_SCOM find / -nouser -o -nogroup ! -fstype nfs -exec ls -ld {} \;
 PROCESS_DIR "/"
 PROCESS_DIR "/etc"
 PROCESS_DIR "/etc/inet/"
@@ -572,33 +558,7 @@ PROCESS_LOGFILE $(ls -l /var/log/mysqld.log | awk '{print$NF}') "MySQL log"
 PROCESS_COM "sestatus -v" "SELinux sestatus"
 PROCESS_FILE $(ls -l /etc/selinux/semanage.conf | awk '{print$NF}') "SELinux semanage.conf"
 PROCESS_FILE $(ls -l /etc/selinux/config | awk '{print$NF}') "SELinux config"
-
 # End of Logging auditing information #
-
-# Oracle Information #
-echo "<br><br>" >> $HTMLFILE
-echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#ffe600">Oracle informatie</FONT>" >> $HTMLFILE
-PROCESS_SECTION1 "Oracle informatie"
-echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
-PROCESS_FILE $(ls -l $ORACLE_HOME/network/admin/listener.ora | awk '{print$NF}')  "Content of listener.ora"
-PROCESS_SCOMMENT Display contents of init Oracle files
-PROCESS_SCOM nice -n 10 find / \( -name init*.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
-PROCESS_SCOMMENT Display contents of orapwd Oracle files
-PROCESS_SCOM nice -n 10 find / \( -name orapwd* \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
-PROCESS_SCOMMENT Display contents of Protocol file for Oracle
-PROCESS_SCOM nice -n 10 find / \( -name protocol.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
-PROCESS_SCOMMENT Display contents of Config.ora file for Oracle
-PROCESS_SCOM nice -n 10 find / \( -name config.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
-PROCESS_SCOMMENT Display contents of Listener file for Oracle
-PROCESS_SCOM nice -n 10 find / \( -name listener.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
-PROCESS_SCOMMENT Display contents of SQLnet.ora file for Oracle
-PROCESS_SCOM nice -n 10 find / \( -name sqlnet.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
-PROCESS_SCOMMENT Display contents of .dbf file for Oracle
-PROCESS_SCOM nice -n 10 find / \( -name *.dbf \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
-PROCESS_SCOMMENT tkprof utility for Oracle
-PROCESS_SCOM nice -n 10 find / \( -name tkprof \) ! -fstype nfs -exec ls -la {} \; -exec ls -la {} \;
-PROCESS_RDIR "$ORACLE_BASE/oradata/"
-# End of Oracle information #
 
 # OS specific commands #
 echo "<br><br>" >> $HTMLFILE
@@ -630,9 +590,6 @@ PROCESS_FILE $(ls -l /usr/lib/objrepos | awk '{print$NF}') "AIX Object Data Mana
 PROCESS_FILE $(ls -l /usr/share/lib/objrepos | awk '{print$NF}') "AIX Object Data Manager /usr/share"
 PROCESS_RDIR "/usr/IBM/HTTPserver/"
 for A in $(ls -1 /usr/IBM/HTTPserver/conf/*); do PROCESS_FILE $(ls -l $A | awk '{print$NF}') "IBM HTTPserver configuration: $A"; done
-
-
-
 # End of OS specific information #
 
 # Custom OS configuration #
@@ -643,6 +600,54 @@ echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
 PROCESS_RDIR "/prj"
 PROCESS_RDIR "/opt"
 # End of Custom OS configuration #
+
+# Oracle Information #
+echo "<br><br>" >> $HTMLFILE
+echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#ffe600">Oracle informatie</FONT>" >> $HTMLFILE
+PROCESS_SECTION1 "Oracle informatie"
+echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
+PROCESS_FILE $(ls -l $ORACLE_HOME/network/admin/listener.ora | awk '{print$NF}')  "Content of listener.ora"
+PROCESS_SCOMMENT Display contents of init Oracle files
+PROCESS_SCOM nice -n 10 find / \( -name init*.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
+PROCESS_SCOMMENT Display contents of orapwd Oracle files
+PROCESS_SCOM nice -n 10 find / \( -name orapwd* \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
+PROCESS_SCOMMENT Display contents of Protocol file for Oracle
+PROCESS_SCOM nice -n 10 find / \( -name protocol.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
+PROCESS_SCOMMENT Display contents of Config.ora file for Oracle
+PROCESS_SCOM nice -n 10 find / \( -name config.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
+PROCESS_SCOMMENT Display contents of Listener file for Oracle
+PROCESS_SCOM nice -n 10 find / \( -name listener.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
+PROCESS_SCOMMENT Display contents of SQLnet.ora file for Oracle
+PROCESS_SCOM nice -n 10 find / \( -name sqlnet.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
+PROCESS_SCOMMENT Display contents of .dbf file for Oracle
+PROCESS_SCOM nice -n 10 find / \( -name *.dbf \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
+PROCESS_SCOMMENT tkprof utility for Oracle
+PROCESS_SCOM nice -n 10 find / \( -name tkprof \) ! -fstype nfs -exec ls -la {} \; -exec ls -la {} \;
+PROCESS_RDIR "$ORACLE_BASE/oradata/"
+# End of Oracle information #
+
+# Permissions and special bits #
+echo "<br><br>" >> $HTMLFILE
+echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#ffe600">Permissions and special bits</FONT>" >> $HTMLFILE
+PROCESS_SECTION1 "Permissions and special bits"
+echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
+PROCESS_SCOMMENT Search filesystem for sticky bits
+PROCESS_SCOM find / -perm -1000 ! -fstype nfs -exec ls -ld {} \;
+PROCESS_SCOMMENT Search filesystem for directory sticky bits 
+PROCESS_SCOM df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null 
+PROCESS_SCOMMENT Search filesystem for SGID bits
+PROCESS_SCOM find / -perm -2000 ! -fstype nfs -exec ls -ld {} \;
+PROCESS_SCOMMENT Search filesystem for SUID bits
+PROCESS_SCOM find / -perm -4000 ! -fstype nfs -exec ls -ld {} \;
+PROCESS_SCOMMENT Search filesystem for world writable files
+PROCESS_SCOM find / -perm -2 -a -type f ! -fstype nfs -exec ls -ld {} \;
+PROCESS_SCOMMENT Search filesystem for world writable directories
+PROCESS_SCOM find / -perm -2 -a -type d ! -fstype nfs -exec ls -ld {} \;
+PROCESS_SCOMMENT Search for files without user or group
+PROCESS_SCOM find / -nouser -o -nogroup ! -fstype nfs -exec ls -ld {} \;
+
+
+# End of permissions and special bits #
 
 clear
 echo ""
