@@ -151,14 +151,14 @@ function PROCESS_SCOM ()
 
 function PROCESS_SECTION1 ()
 {
-echo "<p id=\"section1\">
+echo "<p class=\"section1\">
 "$*"
 </p><hr>" >> $TMPFILE;
 }
 
 function PROCESS_SECTION2 ()
 {
-echo "<p id=\"section2\">
+echo "<p class=\"section2\">
 "$*"
 </p>" >> $HTMLFILE;
 }
@@ -174,23 +174,32 @@ br {
 body {
    background-color: #FFFFFF;
 }
+p {
+   font-family: Arial;
+   font-size: 11px;
+}
+p.header {
+   font-family: Arial;
+   font-size: 18px;
+   font-color: #ffe600;
+}
 p.section1 {
    font-family: Arial;
-   size: 5;
-   margin-top: 3em;
+   font-size: 15px;
+   margin-top: 2em;
 }
 p.section2 {
    font-family: Arial;
-   size: 5;
-   margin-top: 3em;
+   font-size: 11px;
+   margin-top: 2em;
+}
+p.home {
+   font-family: Arial;
+   font-size: 18px;
 }
 a {
    font-family: Arial;
-   size: 6;
-}
-a {
-   font-family: Arial;
-   size: 6;
+   font-size: 11px;
 }
 a:link {
    color: #1C1C1C;
@@ -201,11 +210,10 @@ a:visited {
 </style>
 <title>"$NAME" - EY Audit</title>
 </head>
-<BODY>
-<a name=\"home\">Inhoud</a>" >> $HTMLFILE
+<BODY>" >> $HTMLFILE
 
 # General information #
-echo "<FONT FAMILY="Arial" SIZE="6" COLOR="#ffe600">Algemene informatie</FONT>" >> $HTMLFILE
+echo "<p class=\"header\">Algemene informatie</p>" >> $HTMLFILE
 PROCESS_SECTION1 "Algemene informatie"
 echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
 PROCESS_COM "date" "Current date"
