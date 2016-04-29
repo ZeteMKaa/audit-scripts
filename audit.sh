@@ -46,8 +46,15 @@ echo "[Audit] Audit #2 script running, this may take a while..."
 echo "[Audit] Audit #2 script done!"
 
 # Archiving log files
-echo "[Audit] Archiving data..."
+echo "[EY] Archiving data..."
 if [ -e $(which $L_archive) ];
 then
         echo $L_archive $L_archiveparm $L_afile $L_reportlog $L_logginglog $L_screenlog $L_eyreport
-        echo "[Audit] Archiving done!"
+        echo "[EY] Archiving done!"
+        echo "[EY] Audit script done!"
+        echo "[EY] Dont forget the archive: $L_afile"
+else
+        echo "[EY] Archiving failed, $L_archive not found on system..."
+        echo "[EY] Audit script done!"
+        echo "[EY] Dont forget the files: $L_reportlog, $L_logginglog, $L_screenlog"
+fi
