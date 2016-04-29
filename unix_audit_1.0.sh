@@ -629,8 +629,8 @@ PROCESS_SCOMMENT Display contents of Listener file for Oracle
 PROCESS_SCOM nice -n 10 find / \( -name listener.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
 PROCESS_SCOMMENT Display contents of SQLnet.ora file for Oracle
 PROCESS_SCOM nice -n 10 find / \( -name sqlnet.ora \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
-PROCESS_SCOMMENT Display contents of .dbf file for Oracle
-PROCESS_SCOM nice -n 10 find / \( -name *.dbf \) ! -fstype nfs -exec ls -la {} \; -exec echo "Contents of:" {} \; -exec cat {} \;
+PROCESS_SCOMMENT Display rights of .dbf file for Oracle
+PROCESS_SCOM nice -n 10 find / \( -name *.dbf \) ! -fstype nfs -exec ls -la {} \; 
 PROCESS_SCOMMENT tkprof utility for Oracle
 PROCESS_SCOM nice -n 10 find / \( -name tkprof \) ! -fstype nfs -exec ls -la {} \; -exec ls -la {} \;
 PROCESS_RDIR "$ORACLE_BASE/oradata/"
