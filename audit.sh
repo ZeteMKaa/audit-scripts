@@ -20,6 +20,13 @@ L_debug=0                                       # on = 1 and off = 0
 # Make scripts executable
 chmod +x lynis
 chmod +x unix_audit_1.0.sh
+chown 0:0 lynis
+chown 0:0 unix_audit_1.0.sh
+chown 0:0 default.prf
+chown -R 0:0 db
+chown -R 0:0 include
+chown -R 0:0 plugins
+
 
 # Select profile (for future use of profiles)
 #echo "[?] Select profile:"
