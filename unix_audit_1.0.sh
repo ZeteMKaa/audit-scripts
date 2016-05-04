@@ -644,7 +644,7 @@ echo "<hr NOSHADE WIDTH=100%>" >> $HTMLFILE
 PROCESS_SCOMMENT Search filesystem for sticky bits
 PROCESS_SCOM find / -perm -1000 ! -fstype nfs -exec ls -ld {} \;
 PROCESS_SCOMMENT Search filesystem for directory sticky bits 
-PROCESS_SCOM df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null 
+PROCESS_SCOM df --local -P | tail -n+2 | awk {'print $6'} | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null 
 PROCESS_SCOMMENT Search filesystem for SGID bits
 PROCESS_SCOM find / -perm -2000 ! -fstype nfs -exec ls -ld {} \;
 PROCESS_SCOMMENT Search filesystem for SUID bits
