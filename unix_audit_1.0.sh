@@ -159,7 +159,7 @@ echo "</FONT>" >> $HTMLFILE;
 
 # start of execution
 TMPFILE="temp_file.tmp"
-HTMLFILE="EY_IT_Audit.html"
+HTMLFILE="IT_Audit.html"
 NAME=`uname -n`
 rm -f $HTMLFILE
 rm -f $TMPFILE
