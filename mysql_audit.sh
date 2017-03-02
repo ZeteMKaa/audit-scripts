@@ -49,7 +49,7 @@ cat << EOT >> mysql_audit.sql
 	SELECT * from mysql.user \G;
 
 	/* Check for accounts without a password */;
-	SELECT User, Host FROM mysql.user WHERE Password = '';
+	SELECT User, Host FROM mysql.user WHERE authentication_string = '';
 
 	/* Check for anonymous accounts */;
 	SELECT User, Host FROM mysql.user WHERE User = '';
